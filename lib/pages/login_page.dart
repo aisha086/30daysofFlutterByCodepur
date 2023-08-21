@@ -9,26 +9,24 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
-
-  String name='';
+  String name = '';
   bool ChangeButton = false;
 
   final _formkey = GlobalKey<FormState>();
 
-  moveToHome(BuildContext context) async
-  {
-    if(_formkey.currentState!.validate())
-      {
-        setState(() {
-          ChangeButton=true;
-        });
-        await Future.delayed(Duration(seconds: 1));
-        await Navigator.pushNamed(context, MyRoutes.homeRoute);
-        setState(() {
-          ChangeButton = false;
-        });
-      }
+  moveToHome(BuildContext context) async {
+    if (_formkey.currentState!.validate()) {
+      setState(() {
+        ChangeButton = true;
+      });
+      await Future.delayed(const Duration(seconds: 1));
+      await Navigator.pushNamed(context, MyRoutes.homeRoute);
+      setState(() {
+        ChangeButton = false;
+      });
+    }
   }
+
   @override
   Widget build(BuildContext context) {
     return Material(
@@ -58,14 +56,12 @@ class _LoginPageState extends State<LoginPage> {
                   TextFormField(
                     decoration: const InputDecoration(
                         hintText: "Enter Username", labelText: "Username"),
-                    onChanged: (value)
-                    {
-                      name=value;
+                    onChanged: (value) {
+                      name = value;
                       setState(() {});
                     },
-                    validator: (value){
-                      if(value!.isEmpty)
-                      {
+                    validator: (value) {
+                      if (value!.isEmpty) {
                         return "Username can not be empty";
                       }
                       return null;
@@ -75,15 +71,12 @@ class _LoginPageState extends State<LoginPage> {
                     obscureText: true,
                     decoration: const InputDecoration(
                         hintText: "Enter Password", labelText: "Password"),
-                    validator: (value){
-                      if(value!.isEmpty)
-                        {
-                          return "Password can not be empty";
-                        }
-                      else if(value.length<6)
-                        {
-                          return "Password length should be at least 6";
-                        }
+                    validator: (value) {
+                      if (value!.isEmpty) {
+                        return "Password can not be empty";
+                      } else if (value.length < 6) {
+                        return "Password length should be at least 6";
+                      }
                       return null;
                     },
                   ),
@@ -91,23 +84,28 @@ class _LoginPageState extends State<LoginPage> {
                     height: 40.0,
                   ),
                   InkWell(
-                    onTap: ()=>moveToHome(context),
+                    onTap: () => moveToHome(context),
                     child: AnimatedContainer(
-                      duration: Duration(seconds: 1),
-                      width: ChangeButton?50:150,
+                      duration: const Duration(seconds: 1),
+                      width: ChangeButton ? 50 : 150,
                       height: 50,
                       alignment: Alignment.center,
                       decoration: BoxDecoration(
-                        color: Colors.deepPurple,
-                        borderRadius: BorderRadius.circular(ChangeButton?50:8)
-                      ),
-                      child: ChangeButton?
-                          Icon(Icons.done,color: Colors.white,)
-                          :const Text('Login',style: TextStyle(
-                        color: Colors.white,
-                        fontWeight: FontWeight.bold,
-                        fontSize: 18
-                      ),),
+                          color: Colors.deepPurple,
+                          borderRadius:
+                              BorderRadius.circular(ChangeButton ? 50 : 8)),
+                      child: ChangeButton
+                          ? const Icon(
+                              Icons.done,
+                              color: Colors.white,
+                            )
+                          : const Text(
+                              'Login',
+                              style: TextStyle(
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 18),
+                            ),
                     ),
                   )
                 ],

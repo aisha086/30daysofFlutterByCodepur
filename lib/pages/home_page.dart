@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import '../widgets/drawer.dart';
+
+//Day 10 learnt about context,constraints
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -7,12 +10,13 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        centerTitle: true,
         title: Text("Catalog App"),
       ),
       body: const Center(
-        child: Text('30 Days of flutter'),
+        child: Text('Day 10 learnt about context and constraints'),
       ),
-      drawer: Drawer(),
+      drawer: MyDrawer(),
     );
   }
 }
