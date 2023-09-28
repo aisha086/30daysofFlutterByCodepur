@@ -11,7 +11,7 @@ class ItemWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Card(
       child: ListTile(
-        leading: Container(
+        leading: SizedBox(
           width: 50,
             child:Image.network(item.image,fit: BoxFit.fill,)),
         title: Text(item.name),

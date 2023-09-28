@@ -19,7 +19,7 @@ class MyDrawer extends StatelessWidget {
               child: UserAccountsDrawerHeader(
                 margin: EdgeInsets.zero,
                 accountName: const Text("Aisha Siddiqui"),
-                accountEmail: const Text("aishasiddiqui633@gmail.com"),
+                accountEmail: const Text("aishasiddiqui123@gmail.com"),
                 currentAccountPicture: Image.network(imageUrl),
               )),
           const ListTile(
