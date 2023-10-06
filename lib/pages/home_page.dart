@@ -1,6 +1,8 @@
 import 'dart:convert';
 
 import 'package:catalog_project_codepur/models/catalog.dart';
+import 'package:catalog_project_codepur/utils/routes.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:velocity_x/velocity_x.dart';
@@ -39,14 +41,21 @@ class _HomePageState extends State<HomePage> {
 
     return Scaffold(
       backgroundColor: MyTheme.creamColor,
+     floatingActionButton: FloatingActionButton(
+       onPressed: (){
+         Navigator.pushNamed(context, MyRoutes.cartPageRoute);
+       },
+       backgroundColor: MyTheme.darkBluishColor,
+       child: const Icon(CupertinoIcons.cart),
+     ),
      body: SafeArea(child: Container(
-       padding: Vx.m32,
+       padding: Vx.m24,
        child: Column(
          crossAxisAlignment: CrossAxisAlignment.start,
          children: [
            const CatalogHeader(),
            if(CatalogModel.items.isNotEmpty)
-             const CatalogList().py16().expand()
+             const CatalogList().pOnly(top: 10,bottom: 10).expand()
            else
              const Center(child: CircularProgressIndicator(),).expand()
          ],
