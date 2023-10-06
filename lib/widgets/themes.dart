@@ -21,7 +21,8 @@ class MyTheme {
           backgroundColor: Colors.white,
           elevation: 0.0,
           iconTheme: const IconThemeData(color: Colors.black),
-          titleTextStyle: Theme.of(context).textTheme.titleLarge)
+          titleTextStyle: Theme.of(context).textTheme.titleLarge!.copyWith(color: Colors.black)
+      )
   );
 
   static ThemeData darkTheme(BuildContext context) =>
@@ -44,7 +45,8 @@ class MyTheme {
               backgroundColor: Colors.white,
               elevation: 0.0,
               iconTheme: const IconThemeData(color: Colors.white),
-              titleTextStyle: Theme.of(context).textTheme.titleLarge)
+              titleTextStyle: Theme.of(context).textTheme.titleLarge!.copyWith(color: Colors.white)
+          )
       );
   
   //Colors
