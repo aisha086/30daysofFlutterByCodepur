@@ -1,4 +1,13 @@
 class CatalogModel {
+
+  static final catModel = CatalogModel._internal();
+
+  CatalogModel._internal();
+
+  factory CatalogModel() => catModel;
+  //catalog fields
+  late  CatalogModel _catalog;
+
   static List<Item> items = [];
 
   //Get item by id
