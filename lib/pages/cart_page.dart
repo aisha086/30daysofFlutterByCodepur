@@ -10,12 +10,11 @@ class CartPage extends StatelessWidget {
       backgroundColor: context.canvasColor,
       appBar: AppBar(
         backgroundColor: Colors.transparent,
-        title:  const Text("Cart", style: TextStyle(
-          fontSize: 25
-        )),
+        title: const Text("Cart", style: TextStyle(fontSize: 25)),
         centerTitle: true,
       ),
       body: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           const _CartList().p32().expand(),
           const Divider(),
@@ -23,7 +22,6 @@ class CartPage extends StatelessWidget {
         ],
       ),
     );
-
   }
 }
 
@@ -32,17 +30,21 @@ class _CartTotal extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
+    return Container(
       height: 200,
+      margin: const EdgeInsets.only(bottom: 10),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
           "\$9999".text.xl4.color(context.theme.indicatorColor).make(),
           30.widthBox,
           ElevatedButton(
-              onPressed: (){},
-              child: "Buy".text.make()
-          ).w24(context)
+                  onPressed: () {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                        const SnackBar(content: Text("Buying not supported yet!")));
+                  },
+                  child: "Buy".text.make())
+              .w24(context)
         ],
       ),
     );
@@ -60,8 +62,8 @@ class _CartListState extends State<_CartList> {
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
-      itemCount: 5,
-        itemBuilder: (context,index){
+        itemCount: 5,
+        itemBuilder: (context, index) {
           return ListTile(
             leading: const Icon(Icons.done_rounded),
             trailing: IconButton(
@@ -70,9 +72,6 @@ class _CartListState extends State<_CartList> {
             ),
             title: "Item".text.make(),
           );
-        }
-    );
+        });
   }
 }
-
-
