@@ -2,12 +2,6 @@ import 'package:catalog_project_codepur/models/catalog.dart';
 
 class CartModel{
 
-
-  static final cartModel = CartModel._internal();
-
-  CartModel._internal();
-
-  factory CartModel() => cartModel;
   //catalog fields
   late  CatalogModel _catalog;
 
