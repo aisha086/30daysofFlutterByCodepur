@@ -66,14 +66,17 @@ class _CartListState extends State<_CartList> {
   final _cart = CartModel();
   @override
   Widget build(BuildContext context) {
-    return ListView.builder(
+    return _cart.items.isEmpty? "Nothing to show".text.makeCentered() : ListView.builder(
         itemCount: _cart.items.length,
         itemBuilder: (context, index) {
           return ListTile(
             leading: const Icon(Icons.done_rounded),
             trailing: IconButton(
               icon: const Icon(Icons.remove_circle_outline),
-              onPressed: () {},
+              onPressed: () {
+                _cart.remove(_cart.items[index]);
+                setState(() {});
+              },
             ),
             title: _cart.items[index].name.text.make(),
           );
