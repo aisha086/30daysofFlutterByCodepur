@@ -9,7 +9,6 @@ class CartPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
     Size size = MediaQuery.of(context).size;
 
     return Scaffold(
@@ -42,12 +41,18 @@ class _CartTotal extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
-          "\$${_cart.totalPrice}".text.xl4.color(context.theme.indicatorColor).make(),
+          VxConsumer(builder: (context, _, __){
+           return "\$${_cart.totalPrice}"
+                .text
+                .xl4
+                .color(context.theme.indicatorColor)
+                .make();},
+              mutations: const {RemoveMutation}),
           30.widthBox,
           ElevatedButton(
                   onPressed: () {
-                    ScaffoldMessenger.of(context).showSnackBar(
-                        const SnackBar(content: Text("Buying not supported yet!")));
+                    ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                        content: Text("Buying not supported yet!")));
                   },
                   child: "Buy".text.make())
               .w24(context)
@@ -60,21 +65,22 @@ class _CartTotal extends StatelessWidget {
 class _CartList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    VxState.watch(context, on: [RemoveMutation]);
+
     final CartModel _cart = (VxState.store as MyStore).cart;
-    return _cart.items.isEmpty? "Nothing to show".text.makeCentered() : ListView.builder(
-        itemCount: _cart.items.length,
-        itemBuilder: (context, index) {
-          return ListTile(
-            leading: const Icon(Icons.done_rounded),
-            trailing: IconButton(
-              icon: const Icon(Icons.remove_circle_outline),
-              onPressed: () {
-                _cart.remove(_cart.items[index]);
-                // setState(() {});
-              },
-            ),
-            title: _cart.items[index].name.text.make(),
-          );
-        });
+    return _cart.items.isEmpty
+        ? "Nothing to show".text.makeCentered()
+        : ListView.builder(
+            itemCount: _cart.items.length,
+            itemBuilder: (context, index) {
+              return ListTile(
+                leading: const Icon(Icons.done_rounded),
+                trailing: IconButton(
+                  icon: const Icon(Icons.remove_circle_outline),
+                  onPressed: () => RemoveMutation(_cart.items[index]),
+                ),
+                title: _cart.items[index].name.text.make(),
+              );
+            });
   }
 }
