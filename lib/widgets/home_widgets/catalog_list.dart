@@ -11,7 +11,8 @@ class CatalogList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ListView.builder(
+    return !context.isMobile? GridView.builder(
+      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),
         shrinkWrap: true,
         itemCount: CatalogModel.items.length,
         itemBuilder: (context, index) {
@@ -22,7 +23,19 @@ class CatalogList extends StatelessWidget {
                   MaterialPageRoute(
                       builder: (context) => HomeDetailPage(catalog: catalog))),
               child: CatalogItem(catalog: catalog));
-        });
+        })
+    : ListView.builder(
+    shrinkWrap: true,
+    itemCount: CatalogModel.items.length,
+    itemBuilder: (context, index) {
+    final catalog = CatalogModel.getByPosition(index);
+    return InkWell(
+    onTap: () => Navigator.push(
+    context,
+    MaterialPageRoute(
+    builder: (context) => HomeDetailPage(catalog: catalog))),
+    child: CatalogItem(catalog: catalog));
+    });
   }
 }
 
@@ -32,33 +45,39 @@ class CatalogItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return VxBox(
-        child: Row(
-      children: [
-        Hero(
+    var innerItems = [
+      Hero(
           tag: Key(catalog.id.toString()),
-            child: SizedBox(height:140,child: CatalogImage(image: catalog.image))
-        ),
-        Expanded(
-            child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            catalog.name.text.lg.color(context.theme.indicatorColor).bold.make(),
-            catalog.desc.text.textStyle(context.captionStyle).bold.make(),
-            10.heightBox,
-            ButtonBar(
-              alignment: MainAxisAlignment.spaceBetween,
-              buttonPadding: EdgeInsets.zero,
-              children: [
-                "\$${catalog.price}".text.bold.xl.make(),
-                AddToCart(catalog: catalog)
-              ],
-            ).pOnly(right: 8.0)
-          ],
-        ))
-      ],
-    )).color(context.cardColor).rounded.square(150).make().py12();
+          child: SizedBox(
+              child: CatalogImage(image: catalog.image))
+      ),
+      Expanded(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              catalog.name.text.lg.color(context.theme.indicatorColor).bold.make(),
+              catalog.desc.text.textStyle(context.captionStyle).bold.make(),
+              10.heightBox,
+              ButtonBar(
+                alignment: MainAxisAlignment.spaceBetween,
+                buttonPadding: EdgeInsets.zero,
+                children: [
+                  "\$${catalog.price}".text.bold.xl.make(),
+                  AddToCart(catalog: catalog)
+                ],
+              ).pOnly(right: 8.0)
+            ],
+          ).p(context.isMobile? 0 : 20)
+      )
+    ];
+    return VxBox(
+        child: context.isMobile? Row(
+      children:innerItems,
+    ) : Column(
+          children:innerItems,
+        )
+    ).color(context.cardColor).rounded.square(150).make().py12();
   }
 }
 
