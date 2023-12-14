@@ -1,4 +1,3 @@
-import 'package:catalog_project_codepur/models/cart.dart';
 import 'package:catalog_project_codepur/pages/home_page_detail.dart';
 import 'package:flutter/material.dart';
 import 'package:velocity_x/velocity_x.dart';

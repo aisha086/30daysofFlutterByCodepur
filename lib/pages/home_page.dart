@@ -9,7 +9,6 @@ import 'package:velocity_x/velocity_x.dart';
 
 import '../widgets/home_widgets/catalog_header.dart';
 import '../widgets/home_widgets/catalog_list.dart';
-import '../widgets/themes.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
