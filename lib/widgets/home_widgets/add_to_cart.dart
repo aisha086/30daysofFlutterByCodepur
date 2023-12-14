@@ -11,7 +11,7 @@ class AddToCart extends StatelessWidget {
   AddToCart({super.key, required this.catalog});
 
 
-  final _cart = CartModel();
+
   @override
   Widget build(BuildContext context) {
 
