@@ -77,7 +77,7 @@ class CatalogItem extends StatelessWidget {
     ) : Column(
           children:innerItems,
         )
-    ).color(context.cardColor).rounded.square(150).make().py12();
+    ).color(context.cardColor).rounded.square(150).make().p12();
   }
 }
 
